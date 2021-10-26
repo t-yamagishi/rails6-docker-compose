@@ -9,4 +9,4 @@ RUN apt-get update -qq \
     && apt-get install -y yarn \
     && rm -rf /var/lib/atp/lists/*
 
-WORKDIR /app
+WORKDIR /myapp
