@@ -20,6 +20,16 @@ services:
       - "3000:3000"
     depends_on:
       - db
+      - webpack-dev-server
+
+  webpack-dev-server:
+    build: .
+    command: bin/webpack-dev-server
+    ports:
+      - 3035:3035
+    volumes:
+      - .:/myapp
+      - bundle:/usr/local/bundle
 
 volumes:
   db_data:
