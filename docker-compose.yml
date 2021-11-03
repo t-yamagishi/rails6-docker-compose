@@ -4,7 +4,7 @@ services:
   db:
     platform: linux/x86_64
     image: mysql:8.0
-    command: --default-authentication-plugin=mysql_native_password
+    command: mysqld --default-authentication-plugin=mysql_native_password
     volumes:
       - db_data:/var/lib/mysql
     environment:
@@ -13,6 +13,9 @@ services:
   web:
     build: .
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    environment:
+      SELENUM_REMOTE_URL: http://selenium-chrome:4444
+      WEBPACKER_DEV_SERVER_HOST: webpack-dev-server
     volumes:
       - .:/myapp
       - bundle:/usr/local/bundle
@@ -21,6 +24,7 @@ services:
     depends_on:
       - db
       - webpack-dev-server
+      - selenium-chrome
 
   webpack-dev-server:
     build: .
@@ -30,6 +34,12 @@ services:
     volumes:
       - .:/myapp
       - bundle:/usr/local/bundle
+
+  selenium-chrome:
+    image: seleniarm/standalone-chromium:4.0.0-beta-1-20210215
+    shm_size: 2gb
+    ports:
+      - "4444:4444"
 
 volumes:
   db_data:

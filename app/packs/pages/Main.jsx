@@ -6,7 +6,7 @@ export default function Main() {
   return (
     <>
       <h1>Main</h1>
-      <p>{ count }</p>
+      <p>count = { count }</p>
       <button onClick={() => setCount(count + 1)}>click!</button>
    </>
   );

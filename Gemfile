@@ -23,6 +23,6 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'rexml'
   gem 'selenium-webdriver'
-  gem 'webdrivers'
 end
